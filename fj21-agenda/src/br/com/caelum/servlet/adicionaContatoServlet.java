@@ -24,7 +24,7 @@ public class adicionaContatoServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 			
-		 PrintWriter out = response.getWriter();
+		PrintWriter out = response.getWriter();
          
 	        // pegando os parâmetros do request
 	        String nome = request.getParameter("nome");

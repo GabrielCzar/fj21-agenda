@@ -15,3 +15,4 @@ public interface IGenericDao<T, I>{
 	public void delete(Class<T> objectName, I id);
 
 }
+
