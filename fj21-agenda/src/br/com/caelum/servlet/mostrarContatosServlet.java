@@ -2,7 +2,7 @@ package br.com.caelum.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.caelum.bd.Conexao;
+import br.com.caelum.bd.ContatoDao;
 
-@WebServlet(urlPatterns = {"/oi", "/ola"}, name = "HelloWorld")
-public class OiMundo extends HttpServlet{
-
+@WebServlet("/contatos")
+public class mostrarContatosServlet extends HttpServlet {
+	
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
@@ -25,14 +25,17 @@ public class OiMundo extends HttpServlet{
 	    out.println("</head>");
 	    
 	    out.println("<body>");
-	    out.println("<h1>Oi mundo Servlet!</h1>");
-	    out.println("</body>");
-	    out.println("</html>");	
-	    Conexao conexao = new Conexao();
-	    try {
-			conexao.abrir();
-		} catch (Exception e) {
-			e.printStackTrace();
+	    
+	    ContatoDao contato = new ContatoDao();
+	    List<String> lista = contato.readAll();
+	    for (String nome : lista) {
+	    	out.println("<h1>");
+	    	out.println(nome);
+	    	out.println("</h1><br />");
 		}
+	    
+	    
+	    out.println("</body>");
+	    out.println("</html>");
 	}
 }

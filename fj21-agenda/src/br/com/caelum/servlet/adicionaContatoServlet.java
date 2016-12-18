@@ -2,9 +2,9 @@ package br.com.caelum.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
-import br.caelum.bd.dao.GenericDao;
 import br.com.caelum.jbdc.Contato;
 
 @WebServlet("/adicionaContato")
@@ -24,7 +23,7 @@ public class adicionaContatoServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 			
-		PrintWriter out = response.getWriter();
+			PrintWriter out = response.getWriter();
          
 	        // pegando os parâmetros do request
 	        String nome = request.getParameter("nome");
@@ -35,14 +34,16 @@ public class adicionaContatoServlet extends HttpServlet {
 	        
 	        // fazendo a conversão da data
 	        try {
-	           Date date = new SimpleDateFormat("dd/MM/yyyy")
-	                    .parse(dataEmTexto);
+	        	Date date;
+				date = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto); 
 	            dataNascimento = Calendar.getInstance();
 	            dataNascimento.setTime(date);
 	        } catch (ParseException e) {
 	            out.println("Erro de conversão da data");
 	            return; //para a execução do método
-	        }
+	        }catch (java.text.ParseException e) {
+				e.printStackTrace();
+			}
 	        
 	        // monta um objeto contato
 	        Contato contato = new Contato();
@@ -51,9 +52,8 @@ public class adicionaContatoServlet extends HttpServlet {
 	        contato.setEmail(email);
 	        contato.setDataNascimento(dataNascimento);
 	        
-	        // salva o contato
-	        GenericDao<Contato> contatoDao = new GenericDao<Contato>();
-	        contatoDao.create(contato);
+	        // salva o contato 
+	        //?? ContatoDao......
 	        
 	        // imprime o nome do contato que foi adicionado
 	        out.println("<html>");
@@ -62,5 +62,5 @@ public class adicionaContatoServlet extends HttpServlet {
 	                " adicionado com sucesso");    
 	        out.println("</body>");
 	        out.println("</html>");
-	}
+	 }
 }

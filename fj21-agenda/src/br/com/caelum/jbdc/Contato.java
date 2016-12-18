@@ -1,7 +1,6 @@
 package br.com.caelum.jbdc;
 
 import java.util.Calendar;
-import java.util.Date;
 
 public class Contato {
 	private String nome;
