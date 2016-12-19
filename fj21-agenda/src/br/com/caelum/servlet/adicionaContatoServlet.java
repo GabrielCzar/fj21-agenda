@@ -2,7 +2,10 @@ package br.com.caelum.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.text.SimpleDateFormat;
+import java.text.ParseException;
+
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,9 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
-
-import br.com.caelum.jbdc.Contato;
+import br.com.caelum.jdbc.dao.ContatoDao;
+import br.com.caelum.jdbc.modelo.Contato;
 
 @WebServlet("/adicionaContato")
 public class adicionaContatoServlet extends HttpServlet {
@@ -30,30 +32,23 @@ public class adicionaContatoServlet extends HttpServlet {
 	        String endereco = request.getParameter("endereco");
 	        String email = request.getParameter("email");
 	        String dataEmTexto = request.getParameter("dataNascimento");
-	        Calendar dataNascimento = null;
+	        Calendar dataNascimento = Calendar.getInstance();
 	        
 	        // fazendo a conversão da data
 	        try {
-	        	Date date;
-				date = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto); 
-	            dataNascimento = Calendar.getInstance();
+	        	Date date = new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
 	            dataNascimento.setTime(date);
 	        } catch (ParseException e) {
 	            out.println("Erro de conversão da data");
 	            return; //para a execução do método
-	        }catch (java.text.ParseException e) {
-				e.printStackTrace();
-			}
+	        }
 	        
 	        // monta um objeto contato
-	        Contato contato = new Contato();
-	        contato.setNome(nome);
-	        contato.setEndereco(endereco);
-	        contato.setEmail(email);
-	        contato.setDataNascimento(dataNascimento);
+	        Contato contato = new Contato(nome, email, endereco, dataNascimento);
 	        
 	        // salva o contato 
-	        //?? ContatoDao......
+	        ContatoDao contatoDao = new ContatoDao();
+	        contatoDao.adiciona(contato);
 	        
 	        // imprime o nome do contato que foi adicionado
 	        out.println("<html>");

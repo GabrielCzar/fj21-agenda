@@ -2,6 +2,7 @@ package br.com.caelum.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.caelum.bd.Conexao;
+import br.com.caelum.jdbc.ConnectionFactory;
 
 @WebServlet(urlPatterns = {"/oi", "/ola"}, name = "HelloWorld")
 public class OiMundo extends HttpServlet{
@@ -27,12 +28,15 @@ public class OiMundo extends HttpServlet{
 	    out.println("<body>");
 	    out.println("<h1>Oi mundo Servlet!</h1>");
 	    out.println("</body>");
-	    out.println("</html>");	
-	    Conexao conexao = new Conexao();
-	    try {
-			conexao.abrir();
-		} catch (Exception e) {
+	    out.println("</html>");
+	    
+	    Connection connection = new ConnectionFactory().getConnection();
+		System.out.println("Conexão aberta!");
+		try {
+			connection.close();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	    
 	}
 }

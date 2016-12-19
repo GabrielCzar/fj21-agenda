@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.caelum.bd.ContatoDao;
+import br.com.caelum.jdbc.dao.ContatoDao;
+import br.com.caelum.jdbc.modelo.Contato;
 
 @WebServlet("/contatos")
 public class mostrarContatosServlet extends HttpServlet {
@@ -26,16 +27,16 @@ public class mostrarContatosServlet extends HttpServlet {
 	    
 	    out.println("<body>");
 	    
-	    ContatoDao contato = new ContatoDao();
-	    List<String> lista = contato.readAll();
-	    for (String nome : lista) {
+	    ContatoDao contatoDao = new ContatoDao();
+	    List<Contato> contatos = contatoDao.getLista();
+	    for (Contato contato : contatos) {
 	    	out.println("<h1>");
-	    	out.println(nome);
+	    	out.println(contato.getNome());
 	    	out.println("</h1><br />");
 		}
 	    
-	    
 	    out.println("</body>");
 	    out.println("</html>");
+	    
 	}
 }
