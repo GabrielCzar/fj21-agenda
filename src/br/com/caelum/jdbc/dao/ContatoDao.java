@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.ServletException;
+
 import br.com.caelum.jdbc.ConnectionFactory;
 import br.com.caelum.jdbc.modelo.Contato;
 
@@ -16,7 +18,7 @@ public class ContatoDao {
 	
 	private Connection connection;
 	
-	public ContatoDao() {
+	public ContatoDao() throws ServletException {
 		connection = new ConnectionFactory().getConnection();
 	}
 	

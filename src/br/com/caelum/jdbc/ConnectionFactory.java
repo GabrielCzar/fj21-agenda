@@ -4,14 +4,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.servlet.ServletException;
+
 public class ConnectionFactory {
-    public Connection getConnection() {
+    public Connection getConnection() throws ServletException {
+    	final String DRIVER = "com.mysql.jdbc.Driver"; 
+    	final String URL = "jdbc:mysql://localhost:3306/agenda";
+    	final String USER = "root";
+    	final String PASS = "";
+    	
         try {
-        	Class.forName("com.mysql.jdbc.Driver");
-            return DriverManager.getConnection(
-          "jdbc:mysql://localhost:3306/agenda", "root", "");
-        } catch (SQLException | ClassNotFoundException e) {
+        	Class.forName(DRIVER);
+            return DriverManager.getConnection(URL, USER, PASS);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
-        }
+        } catch (SQLException e) {
+        	throw new ServletException();
+		}
     }
 }
