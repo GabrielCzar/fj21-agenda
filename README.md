@@ -8,3 +8,4 @@ Caelum examples
 - Java EE
 - JDK 1.8
 - Servlet
+- Taglib, jar adicional standart-1.1.2
