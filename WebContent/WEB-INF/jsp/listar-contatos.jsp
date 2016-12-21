@@ -14,10 +14,6 @@
 		<!-- Importando cabecalho de outra pagina -->
 		<c:import url="cabecalho.jsp" />
 
-		<!-- OLD cria o DAO 
-		<jsp:useBean id="dao" class="br.com.caelum.jdbc.dao.ContatoDao"/>
-		-->
-		
 		<table border="1">
 		  <!-- percorre contatos montando as linhas da tabela -->
 		  <c:forEach var="contato" items="${contatos}" varStatus="id">
@@ -49,6 +45,8 @@
 		    </tr>
 		  </c:forEach>
 		</table>
+		
+		<a href="mvc?logica=AdicionarContatoLogic">Adicionar Contato</a>
 		
 		<!-- importando rodape de outra pagina -->
 		<c:import url="rodape.jsp" />

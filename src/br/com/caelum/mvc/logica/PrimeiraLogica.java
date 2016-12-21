@@ -3,6 +3,9 @@ package br.com.caelum.mvc.logica;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.caelum.mvc.logica.interfaces.ILogica;
+import br.com.caelum.pages.Pages;
+
 public class PrimeiraLogica implements ILogica {
 
 	@Override
@@ -11,7 +14,7 @@ public class PrimeiraLogica implements ILogica {
         
         System.out.println("Retornando o nome da página JSP ...");
         
-        return "primeira-logica.jsp";
+        return Pages.getFirstlogic();
 	}
 
 }

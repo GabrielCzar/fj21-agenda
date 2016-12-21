@@ -7,20 +7,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.jdbc.dao.ContatoDao;
 import br.com.caelum.jdbc.modelo.Contato;
+import br.com.caelum.mvc.logica.interfaces.ILogica;
+import br.com.caelum.pages.Pages;
 
 public class ListaContatosLogic implements ILogica {
 
+	private static final String listaContatosLogicURL = "mvc?logica=ListaContatosLogic";
+	
+	public static String getListarContatosURL(){
+		return listaContatosLogicURL;
+	}
+	
 	@Override
 	public String executa(HttpServletRequest req, HttpServletResponse res)
 	        throws Exception {
 
-	      // Monta a lista de contatos
-		  ContatoDao contatoDao = new ContatoDao();
-	      List<Contato> contatos = contatoDao.getLista();
-
-	      // Guarda a lista no request
-	      req.setAttribute("contatos", contatos);
-	  
-	      return "lista-contatos.jsp";
+		List<Contato> contatos = new ContatoDao().getLista();
+	    
+	    req.setAttribute("contatos", contatos);
+	    
+	    return Pages.getListarcontatos();
 	}
 }

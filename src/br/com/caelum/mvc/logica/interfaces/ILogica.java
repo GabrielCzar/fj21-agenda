@@ -1,4 +1,4 @@
-package br.com.caelum.mvc.logica;
+package br.com.caelum.mvc.logica.interfaces;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

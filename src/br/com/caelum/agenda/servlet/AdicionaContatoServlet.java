@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.caelum.jdbc.dao.ContatoDao;
 import br.com.caelum.jdbc.modelo.Contato;
+import br.com.caelum.mvc.logica.ListaContatosLogic;
 
 @WebServlet("/adicionaContato")
 public class AdicionaContatoServlet extends HttpServlet {
@@ -66,8 +67,8 @@ public class AdicionaContatoServlet extends HttpServlet {
         //out.println("</body>");
         //out.println("</html>");
         
-        RequestDispatcher rd = request
-        		.getRequestDispatcher("/contato-adicionado.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher(ListaContatosLogic.getListarContatosURL());
+        
         rd.forward(request,response);
     }
 }
