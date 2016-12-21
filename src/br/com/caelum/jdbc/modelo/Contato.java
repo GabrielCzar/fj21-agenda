@@ -18,6 +18,14 @@ public class Contato {
 		this.dataNascimento = dataNascimento;
 	}
 	
+	public Contato(Long id, String nome, String email, String endereco, Calendar dataNascimento) {
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.endereco = endereco;
+		this.dataNascimento = dataNascimento;
+	}
+	
 	public Long getId() {
 		return id;
 	}

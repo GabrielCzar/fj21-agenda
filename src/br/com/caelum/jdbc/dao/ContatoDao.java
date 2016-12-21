@@ -56,6 +56,7 @@ public class ContatoDao {
 			
 			ArrayList<Contato> contatos = new ArrayList<>();
 			while (rs.next()) {
+				Long id = rs.getLong("id");
 				String nome = rs.getString("nome");
 				String email = rs.getString("email");
 				String endereco = rs.getString("endereco");
@@ -63,7 +64,7 @@ public class ContatoDao {
 				Calendar dataNascimento = Calendar.getInstance(); 
 				dataNascimento.setTime(rs.getDate("dataNascimento"));
 				
-				contatos.add(new Contato(nome, email, endereco, dataNascimento));
+				contatos.add(new Contato(id, nome, email, endereco, dataNascimento));
 			}
 			rs.close();
 			stmt.close();
@@ -92,8 +93,7 @@ public class ContatoDao {
 	
 	public void delete(Contato contato) {
 		try {
-	         PreparedStatement stmt = connection.prepareStatement("delete" +
-	                 "from contatos where id=?");
+	         PreparedStatement stmt = connection.prepareStatement("delete from contato where id=?");
 	         stmt.setLong(1, contato.getId());
 	         stmt.execute();
 	         stmt.close();
