@@ -21,7 +21,7 @@ public class RemoveContatoLogic implements ILogica {
 
 	    System.out.println("Excluindo contato... ");
 
-	    return "lista-contatos.jsp";
+	    return "mvc?logica=ListaContatosLogic";
 	    
 	}
 
