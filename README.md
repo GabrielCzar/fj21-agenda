@@ -10,5 +10,5 @@ Caelum examples
 - Servlet
 - JSTL
 	- jstl-api-1.2
-	- jstl-impl-1.1
+	- jstl-impl-1.2
 
