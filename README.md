@@ -9,6 +9,6 @@ Caelum examples
 - JDK 1.8
 - Servlet
 - JSTL
-	- jstl-api-1.2.1
-	- jstl-imp-1.1.2
+	- jstl-api-1.2
+	- jstl-impl-1.1
 
