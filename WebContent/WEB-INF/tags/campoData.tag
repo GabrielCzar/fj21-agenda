@@ -6,4 +6,4 @@
 
 <script>
   $("#${id}").datepicker({dateFormat: 'dd/mm/yy'});
-</script></script>
+</script>
