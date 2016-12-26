@@ -2,6 +2,7 @@ package br.com.caelum.agenda.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -54,19 +55,12 @@ public class AdicionaContatoServlet extends HttpServlet {
         contato.setEmail(email);
         contato.setDataNascimento(dataNascimento);
         
+        Connection connection = (Connection) request
+                .getAttribute("conexao");
         // salva o contato
-        ContatoDao dao = new ContatoDao();
+        ContatoDao dao = new ContatoDao(connection);
         dao.adiciona(contato);
-        
-        // OLD
-        //imprime o nome do contato que foi adicionado
-        //out.println("<html>");
-        //out.println("<body>");
-        //out.println("Contato " + contato.getNome() +
-        //        " adicionado com sucesso");
-        //out.println("</body>");
-        //out.println("</html>");
-        
+       
         RequestDispatcher rd = request.getRequestDispatcher(ListaContatosLogic.getListarContatosURL());
         
         rd.forward(request,response);
